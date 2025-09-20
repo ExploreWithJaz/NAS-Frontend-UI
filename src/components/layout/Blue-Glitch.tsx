@@ -4,9 +4,10 @@ import { motion } from "framer-motion";
 
 type BlueGlitchProps = {
   children: ReactNode;
+  animation?: boolean;
 };
 
-export default function BlueGlitch({ children }: BlueGlitchProps) {
+export default function BlueGlitch({ children, animation = true }: BlueGlitchProps) {
   // Generate random positions for particles ONCE per mount
   const particles = useMemo(
     () =>
@@ -42,19 +43,27 @@ export default function BlueGlitch({ children }: BlueGlitchProps) {
         style={{
           background: "radial-gradient(ellipse at center, #242a3d 0%, #1a1f2e 50%, #141823 100%)",
         }}
-        animate={{
-          background: [
-            "radial-gradient(ellipse at 50% 50%, #242a3d 0%, #1a1f2e 50%, #141823 100%)",
-            "radial-gradient(ellipse at 60% 40%, #242a3d 0%, #1a1f2e 50%, #141823 100%)",
-            "radial-gradient(ellipse at 40% 60%, #242a3d 0%, #1a1f2e 50%, #141823 100%)",
-          ],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          repeatType: "reverse",
-          ease: "easeInOut",
-        }}
+        animate={
+          animation
+            ? {
+                background: [
+                  "radial-gradient(ellipse at 50% 50%, #242a3d 0%, #1a1f2e 50%, #141823 100%)",
+                  "radial-gradient(ellipse at 60% 40%, #242a3d 0%, #1a1f2e 50%, #141823 100%)",
+                  "radial-gradient(ellipse at 40% 60%, #242a3d 0%, #1a1f2e 50%, #141823 100%)",
+                ],
+              }
+            : undefined
+        }
+        transition={
+          animation
+            ? {
+                duration: 20,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut",
+              }
+            : undefined
+        }
       />
 
       {/* Grid overlay */}
@@ -67,14 +76,22 @@ export default function BlueGlitch({ children }: BlueGlitchProps) {
           `,
           backgroundSize: "60px 60px",
         }}
-        animate={{
-          backgroundPosition: ["0px 0px", "60px 60px"],
-        }}
-        transition={{
-          duration: 30,
-          repeat: Infinity,
-          ease: "linear",
-        }}
+        animate={
+          animation
+            ? {
+                backgroundPosition: ["0px 0px", "60px 60px"],
+              }
+            : undefined
+        }
+        transition={
+          animation
+            ? {
+                duration: 30,
+                repeat: Infinity,
+                ease: "linear",
+              }
+            : undefined
+        }
       />
 
       {/* Blue glow orbs */}
@@ -86,17 +103,25 @@ export default function BlueGlitch({ children }: BlueGlitchProps) {
           top: "30%",
           left: "40%",
         }}
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.6, 0.3],
-          x: [-10, 10, -10],
-          y: [-5, 5, -5],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+        animate={
+          animation
+            ? {
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.6, 0.3],
+                x: [-10, 10, -10],
+                y: [-5, 5, -5],
+              }
+            : undefined
+        }
+        transition={
+          animation
+            ? {
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }
+            : undefined
+        }
       />
 
       <motion.div
@@ -107,17 +132,25 @@ export default function BlueGlitch({ children }: BlueGlitchProps) {
           top: "60%",
           left: "70%",
         }}
-        animate={{
-          scale: [1.1, 0.9, 1.1],
-          opacity: [0.4, 0.7, 0.4],
-          x: [5, -5, 5],
-          y: [8, -8, 8],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+        animate={
+          animation
+            ? {
+                scale: [1.1, 0.9, 1.1],
+                opacity: [0.4, 0.7, 0.4],
+                x: [5, -5, 5],
+                y: [8, -8, 8],
+              }
+            : undefined
+        }
+        transition={
+          animation
+            ? {
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }
+            : undefined
+        }
       />
 
       {/* Floating particles */}
@@ -131,18 +164,26 @@ export default function BlueGlitch({ children }: BlueGlitchProps) {
             left: `${particle.x}%`,
             top: `${particle.y}%`,
           }}
-          animate={{
-            x: [-20, 20, -20],
-            y: [-15, 15, -15],
-            opacity: [0.3, 1, 0.3],
-            scale: [0.8, 1.2, 0.8],
-          }}
-          transition={{
-            duration: particle.duration,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: particle.id * 0.5,
-          }}
+          animate={
+            animation
+              ? {
+                  x: [-20, 20, -20],
+                  y: [-15, 15, -15],
+                  opacity: [0.3, 1, 0.3],
+                  scale: [0.8, 1.2, 0.8],
+                }
+              : undefined
+          }
+          transition={
+            animation
+              ? {
+                  duration: particle.duration,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: particle.id * 0.5,
+                }
+              : undefined
+          }
         />
       ))}
 
@@ -158,18 +199,26 @@ export default function BlueGlitch({ children }: BlueGlitchProps) {
             top: `${square.y}%`,
             background: "rgba(76, 201, 240, 0.1)",
           }}
-          animate={{
-            opacity: [0, 1, 0.2, 1, 0, 1, 0],
-            scale: [1, 1.1, 0.9, 1.05, 1],
-            x: [0, 2, -1, 1, 0],
-            y: [0, -1, 2, -1, 0],
-          }}
-          transition={{
-            duration: square.duration,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: square.id * 0.5,
-          }}
+          animate={
+            animation
+              ? {
+                  opacity: [0, 1, 0.2, 1, 0, 1, 0],
+                  scale: [1, 1.1, 0.9, 1.05, 1],
+                  x: [0, 2, -1, 1, 0],
+                  y: [0, -1, 2, -1, 0],
+                }
+              : undefined
+          }
+          transition={
+            animation
+              ? {
+                  duration: square.duration,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: square.id * 0.5,
+                }
+              : undefined
+          }
         />
       ))}
 
@@ -184,21 +233,29 @@ export default function BlueGlitch({ children }: BlueGlitchProps) {
           `,
           backgroundSize: "100px 100px, 150px 150px, 80px 80px",
         }}
-        animate={{
-          backgroundPosition: [
-            "0px 0px, 0px 0px, 0px 0px",
-            "-50px -50px, -75px -75px, -40px -40px",
-          ],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "linear",
-        }}
+        animate={
+          animation
+            ? {
+                backgroundPosition: [
+                  "0px 0px, 0px 0px, 0px 0px",
+                  "-50px -50px, -75px -75px, -40px -40px",
+                ],
+              }
+            : undefined
+        }
+        transition={
+          animation
+            ? {
+                duration: 20,
+                repeat: Infinity,
+                ease: "linear",
+              }
+            : undefined
+        }
       />
 
       {/* Content container */}
-      <div className="relative z-50 w-full h-full">{children}</div>
+      <div className="flex z-50 w-full h-full items-center justify-center">{children}</div>
     </div>
   );
 }
