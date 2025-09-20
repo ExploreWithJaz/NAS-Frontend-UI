@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/:path*',
-        destination: '/', // all unmatched requests go here
+        destination: '/forbidden', // all unmatched requests go here
         permanent: false,
       },
     ];
