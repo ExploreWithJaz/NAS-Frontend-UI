@@ -20,6 +20,12 @@ function page() {
           <div>
             <p className="mt-4 text-white">
               This service is private. You don’t have permission to access it.
+              <br />
+              Access denied. Unauthorized intrusion detected.
+              <br />
+              Your connection has been terminated and logged for security analysis.
+              <br />
+              Further attempts will result in immediate IP blacklisting.
             </p>
           </div>
         </div>
