@@ -32,7 +32,9 @@ function BadRequestContent() {
               </p>
             ) : (
               <p className="mt-4 text-white">
-                An unexpected error occurred.
+                A server error occurred while processing your request.
+                <br />
+                Please try again later or contact your server administrator.
               </p>
             )}
           </div>

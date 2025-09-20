@@ -32,7 +32,9 @@ function ForbiddenContent() {
               </p>
             ) : (
               <p className="mt-4 text-white">
-                You are not allowed to access this resource.
+                You do not have permission to access this resource.
+                <br />
+                Contact your server administrator for more information.
               </p>
             )}
           </div>

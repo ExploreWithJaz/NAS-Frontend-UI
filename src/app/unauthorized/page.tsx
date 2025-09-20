@@ -33,6 +33,8 @@ function UnauthorizedContent() {
             ) : (
               <p className="mt-4 text-white">
                 You are not authorized to access this resource.
+                <br />
+                Please provide valid credentials.
               </p>
             )}
           </div>

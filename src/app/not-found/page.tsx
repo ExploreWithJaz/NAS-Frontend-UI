@@ -32,7 +32,9 @@ function NotFoundContent() {
               </p>
             ) : (
               <p className="mt-4 text-white">
-                The requested resource could not be found.
+                The requested resource was not found on this server.
+                <br />
+                Please check the URL or contact your server administrator.
               </p>
             )}
           </div>
