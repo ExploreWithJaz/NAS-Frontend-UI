@@ -1,5 +1,5 @@
 'use client';
-import React, { ReactNode, useMemo } from "react";
+import React, { ReactNode, useMemo, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 type Variant = "default" | "blue" | "red" | "orange" | "yellow" | "purple";
@@ -25,24 +25,39 @@ export default function Glitch({
   variant = "blue",
 }: GlitchProps) {
   const colors = variantColors[variant];
+  
+  // State to track if we're on mobile
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check viewport width on mount and resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 560);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Generate random positions for particles ONCE per mount
   const particles = useMemo(
     () =>
-      Array.from({ length: 16 }, (_, i) => ({
+      Array.from({ length: isMobile ? 8 : 16 }, (_, i) => ({
         id: i,
         size: Math.random() * 2 + 1,
         x: Math.random() * 100,
         y: Math.random() * 100,
         duration: Math.random() * 5 + 5,
       })),
-    []
+    [isMobile]
   );
 
   // Generate random glitch squares ONCE per mount
   const glitchSquares = useMemo(
     () =>
-      Array.from({ length: 16 }, (_, i) => ({
+      Array.from({ length: isMobile ? 8 : 16 }, (_, i) => ({
         id: i,
         width: Math.random() * 60 + 20,
         height: Math.random() * 40 + 15,
@@ -50,16 +65,16 @@ export default function Glitch({
         y: Math.random() * 90,
         duration: Math.random() * 1.3 + 0.7,
       })),
-    []
+    [isMobile]
   );
 
   // Generate binary code streams with grid-based positioning to prevent overlap
   const binaryStreams = useMemo(
     () => {
-      const gridCols = 6; // Number of columns
-      const gridRows = 3; // Number of rows
+      const gridCols = isMobile ? 3 : 6; // Fewer columns on mobile
+      const gridRows = isMobile ? 3 : 3; // Keep same rows
       const totalSlots = gridCols * gridRows;
-      const streamCount = 12;
+      const streamCount = isMobile ? 8 : 12;
       
       // Create available grid positions
       const availablePositions = [];
@@ -94,7 +109,7 @@ export default function Glitch({
         };
       });
     },
-    []
+    [isMobile]
   );
 
   return (
