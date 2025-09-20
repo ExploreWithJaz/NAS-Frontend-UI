@@ -1,10 +1,13 @@
+"use client";
+import { useSearchParams } from "next/navigation";
+import Glitch from "@/components/layout/Glitch";
+import Container from "@/components/ui/Container";
+import Icon from "@/components/ui/Icon";
 
-import React from 'react'
-import Glitch from '@/components/layout/Glitch'
-import Container from '@/components/ui/Container'
-import Icon from '@/components/ui/Icon'
+export default function ForbiddenPage() {
+  const searchParams = useSearchParams();
+  const domain = searchParams.get("domain");
 
-function page() {
   return (
     <Glitch animation={true} variant="orange">
       <Container
@@ -13,19 +16,24 @@ function page() {
         className="p-2.5 mx-4 flex w-[400px] h-auto"
       >
         <div>
-          <div className='flex flex-row items-center gap-2.5'>
+          <div className="flex flex-row items-center gap-2.5">
             <Icon name="forbidden" size={34} color="#ff9f40" />
             <h1 className="text-2xl font-bold text-white">403 Forbidden</h1>
           </div>
           <div>
-            <p className="mt-4 text-white">
-              This website has been blocked by your server administrator. Please contact them if you believe this is an error.
-            </p>
+            {domain ? (
+              <p className="mt-4 text-white">
+                Access to <span className="text-red-400">{domain}</span> has been blocked by your server administrator. <br />
+                Contact your administrator for more information.
+              </p>
+            ) : (
+              <p className="mt-4 text-white">
+                You are not allowed to access this resource.
+              </p>
+            )}
           </div>
         </div>
       </Container>
     </Glitch>
-  )
+  );
 }
-
-export default page
