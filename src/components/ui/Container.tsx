@@ -25,14 +25,14 @@ export default function Container({
     glass: "bg-white/20 backdrop-blur-md border border-white/30 shadow-lg",
     card: "border border-[#4CC9F0] bg-[#4CC9F033] rounded-lg shadow-md p-4",
   }[variant];
-  const colorClass = {
+const colorClass = {
     default: "border-gray-300 bg-gray-700",
     blue: "border-[#4CC9F0] bg-[#4CC9F033]",
-    red: "border-red-500 bg-red-700",
-    orange: "border-orange-500 bg-orange-700",
-    yellow: "border-yellow-500 bg-yellow-700",
-    purple: "border-purple-500 bg-purple-700",
-  }[color];
+    red: "border-[#EF4444] bg-[#EF444433]",
+    orange: "border-[#F97316] bg-[#F9731633]",
+    yellow: "border-[#EAB308] bg-[#EAB30833]",
+    purple: "border-[#8B5CF6] bg-[#8B5CF633]",
+}[color];
 
   return (
     <div
