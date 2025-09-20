@@ -21,11 +21,7 @@ function page() {
             <p className="mt-4 text-white">
               This service is private. You don’t have permission to access it.
               <br />
-              Access denied. Unauthorized intrusion detected.
-              <br />
-              Your connection has been terminated and logged for security analysis.
-              <br />
-              Further attempts will result in immediate IP blacklisting.
+              Please contact your server administrator for more information.
             </p>
           </div>
         </div>
