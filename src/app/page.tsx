@@ -6,15 +6,15 @@ import Icon from '@/components/ui/Icon'
 
 function page() {
   return (
-    <BlueGlitch animation={true} variant="yellow">
+    <BlueGlitch animation={true} variant="blue">
       <Container
         variant="card"
-        color="yellow"
-        className="p-2.5 flex w-[400px] h-auto"
+        color="blue"
+        className="p-2.5 mx-4 flex w-[400px] h-auto"
       >
         <div>
           <div className='flex flex-row items-center gap-2.5'>
-            <Icon name="link" size={48} color="#4CC9F0" />
+            <Icon name="forbidden" size={34} color="#4CC9F0" />
             <h1 className="text-2xl font-bold text-white">403 Forbidden</h1>
           </div>
           <div>
@@ -24,11 +24,6 @@ function page() {
             <p className="mt-2 text-white">
               Contact your Network Admin.
             </p>
-          </div>
-          <div className="mt-6">
-            <button className="px-4 py-2 bg-[#4CC9F0] text-white rounded hover:bg-[#3bb0e0] transition">
-              Go Back
-            </button>
           </div>
         </div>
       </Container>

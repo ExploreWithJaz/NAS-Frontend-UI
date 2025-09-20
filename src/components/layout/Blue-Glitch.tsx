@@ -28,7 +28,7 @@ export default function BlueGlitch({
   // Generate random positions for particles ONCE per mount
   const particles = useMemo(
     () =>
-      Array.from({ length: 8 }, (_, i) => ({
+      Array.from({ length: 12 }, (_, i) => ({
         id: i,
         size: Math.random() * 2 + 1,
         x: Math.random() * 100,
@@ -41,7 +41,7 @@ export default function BlueGlitch({
   // Generate random glitch squares ONCE per mount
   const glitchSquares = useMemo(
     () =>
-      Array.from({ length: 8 }, (_, i) => ({
+      Array.from({ length: 12 }, (_, i) => ({
         id: i,
         width: Math.random() * 60 + 20,
         height: Math.random() * 40 + 15,
