@@ -2,12 +2,29 @@
 import React, { ReactNode, useMemo } from "react";
 import { motion } from "framer-motion";
 
+type Variant = "blue" | "red" | "orange" | "yellow" | "purple";
+
 type BlueGlitchProps = {
   children: ReactNode;
   animation?: boolean;
+  variant?: Variant;
 };
 
-export default function BlueGlitch({ children, animation = true }: BlueGlitchProps) {
+const variantColors: Record<Variant, { main: string; bg: string; gradient: string }> = {
+  blue:   { main: "76, 201, 240", bg: "#1a1f2e", gradient: "#242a3d" },
+  red:    { main: "255, 99, 132", bg: "#2e1a1a", gradient: "#3d2424" },
+  orange: { main: "255, 159, 64", bg: "#2e231a", gradient: "#3d2f24" },
+  yellow: { main: "255, 205, 86", bg: "#2e2c1a", gradient: "#3d3824" },
+  purple: { main: "153, 102, 255", bg: "#231a2e", gradient: "#2f243d" },
+};
+
+export default function BlueGlitch({
+  children,
+  animation = true,
+  variant = "blue",
+}: BlueGlitchProps) {
+  const colors = variantColors[variant];
+
   // Generate random positions for particles ONCE per mount
   const particles = useMemo(
     () =>
@@ -36,20 +53,20 @@ export default function BlueGlitch({ children, animation = true }: BlueGlitchPro
   );
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-[#1a1f2e]">
+    <div className="relative w-full h-screen overflow-hidden" style={{ background: colors.bg }}>
       {/* Background gradient with subtle animation */}
       <motion.div
         className="absolute inset-0"
         style={{
-          background: "radial-gradient(ellipse at center, #242a3d 0%, #1a1f2e 50%, #141823 100%)",
+          background: `radial-gradient(ellipse at center, ${colors.gradient} 0%, ${colors.bg} 50%, #141823 100%)`,
         }}
         animate={
           animation
             ? {
                 background: [
-                  "radial-gradient(ellipse at 50% 50%, #242a3d 0%, #1a1f2e 50%, #141823 100%)",
-                  "radial-gradient(ellipse at 60% 40%, #242a3d 0%, #1a1f2e 50%, #141823 100%)",
-                  "radial-gradient(ellipse at 40% 60%, #242a3d 0%, #1a1f2e 50%, #141823 100%)",
+                  `radial-gradient(ellipse at 50% 50%, ${colors.gradient} 0%, ${colors.bg} 50%, #141823 100%)`,
+                  `radial-gradient(ellipse at 60% 40%, ${colors.gradient} 0%, ${colors.bg} 50%, #141823 100%)`,
+                  `radial-gradient(ellipse at 40% 60%, ${colors.gradient} 0%, ${colors.bg} 50%, #141823 100%)`,
                 ],
               }
             : undefined
@@ -71,8 +88,8 @@ export default function BlueGlitch({ children, animation = true }: BlueGlitchPro
         className="absolute inset-0 opacity-20"
         style={{
           backgroundImage: `
-            linear-gradient(45deg, transparent 49%, rgba(76, 201, 240, 0.10) 50%, transparent 51%),
-            linear-gradient(-45deg, transparent 49%, rgba(76, 201, 240, 0.10) 50%, transparent 51%)
+            linear-gradient(45deg, transparent 49%, rgba(${colors.main}, 0.10) 50%, transparent 51%),
+            linear-gradient(-45deg, transparent 49%, rgba(${colors.main}, 0.10) 50%, transparent 51%)
           `,
           backgroundSize: "60px 60px",
         }}
@@ -94,11 +111,11 @@ export default function BlueGlitch({ children, animation = true }: BlueGlitchPro
         }
       />
 
-      {/* Blue glow orbs */}
+      {/* Glow orbs */}
       <motion.div
         className="absolute w-48 h-48 rounded-full"
         style={{
-          background: "radial-gradient(circle, rgba(76, 201, 240, 0.12) 0%, transparent 70%)",
+          background: `radial-gradient(circle, rgba(${colors.main}, 0.12) 0%, transparent 70%)`,
           filter: "blur(2px)",
           top: "30%",
           left: "40%",
@@ -127,7 +144,7 @@ export default function BlueGlitch({ children, animation = true }: BlueGlitchPro
       <motion.div
         className="absolute w-36 h-36 rounded-full"
         style={{
-          background: "radial-gradient(circle, rgba(76, 201, 240, 0.10) 0%, transparent 60%)",
+          background: `radial-gradient(circle, rgba(${colors.main}, 0.10) 0%, transparent 60%)`,
           filter: "blur(1px)",
           top: "60%",
           left: "70%",
@@ -157,8 +174,9 @@ export default function BlueGlitch({ children, animation = true }: BlueGlitchPro
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute rounded-full bg-blue-400"
+          className="absolute rounded-full"
           style={{
+            background: `rgb(${colors.main})`,
             width: `${particle.size}px`,
             height: `${particle.size}px`,
             left: `${particle.x}%`,
@@ -191,13 +209,14 @@ export default function BlueGlitch({ children, animation = true }: BlueGlitchPro
       {glitchSquares.map((square) => (
         <motion.div
           key={square.id}
-          className="absolute border border-blue-400/60"
+          className="absolute"
           style={{
+            border: `1px solid rgba(${colors.main}, 0.6)`,
             width: `${square.width}px`,
             height: `${square.height}px`,
             left: `${square.x}%`,
             top: `${square.y}%`,
-            background: "rgba(76, 201, 240, 0.1)",
+            background: `rgba(${colors.main}, 0.1)`,
           }}
           animate={
             animation
@@ -227,9 +246,9 @@ export default function BlueGlitch({ children, animation = true }: BlueGlitchPro
         className="absolute inset-0 opacity-30"
         style={{
           backgroundImage: `
-            radial-gradient(circle at 20% 30%, rgba(76, 201, 240, 0.03) 1px, transparent 1px),
-            radial-gradient(circle at 80% 70%, rgba(76, 201, 240, 0.02) 1px, transparent 1px),
-            radial-gradient(circle at 40% 80%, rgba(76, 201, 240, 0.015) 1px, transparent 1px)
+            radial-gradient(circle at 20% 30%, rgba(${colors.main}, 0.03) 1px, transparent 1px),
+            radial-gradient(circle at 80% 70%, rgba(${colors.main}, 0.02) 1px, transparent 1px),
+            radial-gradient(circle at 40% 80%, rgba(${colors.main}, 0.015) 1px, transparent 1px)
           `,
           backgroundSize: "100px 100px, 150px 150px, 80px 80px",
         }}
