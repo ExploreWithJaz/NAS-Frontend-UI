@@ -19,7 +19,7 @@ function page() {
           </div>
           <div>
             <p className="mt-4 text-white">
-              This service is private. You don’t have permission to access it.
+              This website is private, you don’t have permission to access it.
               <br />
               Please contact your server administrator for more information.
             </p>
