@@ -4,8 +4,14 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: '/:path*',
-        destination: '/forbidden', // all unmatched requests go here
+        source: '/forbidden',
+        destination: '/forbidden',
+        permanent: false,
+      },
+      {
+        // Exclude /forbidden from being redirected
+        source: '/:path((?!forbidden$).*)',
+        destination: '/forbidden',
         permanent: false,
       },
     ];
