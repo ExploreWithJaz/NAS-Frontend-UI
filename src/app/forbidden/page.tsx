@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 
 function ForbiddenContent() {
   const searchParams = useSearchParams();
-  const domain = searchParams.get("domain");
+  const domain = searchParams.get("original_url") || searchParams.get("domain");
 
   return (
     <Glitch animation={true} variant="orange">

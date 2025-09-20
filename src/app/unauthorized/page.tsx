@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 
 function UnauthorizedContent() {
   const searchParams = useSearchParams();
-  const domain = searchParams.get("domain");
+  const domain = searchParams.get("original_url") || searchParams.get("domain");
 
   return (
     <Glitch animation={true} variant="red">
@@ -28,7 +28,7 @@ function UnauthorizedContent() {
               <p className="mt-4 text-white">
                 You are not authorized to access <span className="text-red-400">{domain}</span>.
                 <br />
-                Please provide valid credentials.
+                Please enter valid credentials to continue.
               </p>
             ) : (
               <p className="mt-4 text-white">
