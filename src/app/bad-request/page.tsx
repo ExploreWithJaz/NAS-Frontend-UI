@@ -19,7 +19,7 @@ function page() {
           </div>
           <div>
             <p className="mt-4 text-white">
-              The request could not be understood by the server due to malformed syntax.
+              The request could not be understood by the server due to malformed syntax. Please check your request and try again.
             </p>
           </div>
         </div>

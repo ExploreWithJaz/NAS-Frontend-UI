@@ -19,7 +19,7 @@ function page() {
           </div>
           <div>
             <p className="mt-4 text-white">
-              This page has been blocked by your server administrator. Please contact them if you believe this is an error.
+              This website has been blocked by your server administrator. Please contact them if you believe this is an error.
             </p>
           </div>
         </div>

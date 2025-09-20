@@ -19,7 +19,7 @@ function page() {
           </div>
           <div>
             <p className="mt-4 text-white">
-                The requested resource could not be found on this server.
+                The requested resource could not be found on this server. Please check the URL and try again.
             </p>
           </div>
         </div>
