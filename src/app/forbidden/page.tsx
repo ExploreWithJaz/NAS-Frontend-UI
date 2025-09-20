@@ -23,7 +23,8 @@ export default function ForbiddenPage() {
           <div>
             {domain ? (
               <p className="mt-4 text-white">
-                Access to <span className="text-red-400">{domain}</span> has been blocked by your server administrator. <br />
+                Access to <span className="text-red-400">{domain}</span> has been blocked by your server administrator. 
+                <br />
                 Contact your administrator for more information.
               </p>
             ) : (

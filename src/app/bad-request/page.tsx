@@ -25,7 +25,7 @@ export default function BadRequestPage() {
               <p className="mt-4 text-white">
                 A server error occurred while trying to reach <span className="text-red-400">{domain}</span>.
                 <br />
-                Please try again later or contact your administrator.
+                Please try again later or contact your server administrator.
               </p>
             ) : (
               <p className="mt-4 text-white">

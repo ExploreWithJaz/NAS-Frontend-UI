@@ -25,7 +25,7 @@ export default function NotFoundPage() {
               <p className="mt-4 text-white">
                 The domain <span className="text-red-400">{domain}</span> was not found or is blocked.
                 <br />
-                Please check the URL or contact your administrator.
+                Please check the URL or contact your server administrator.
               </p>
             ) : (
               <p className="mt-4 text-white">
