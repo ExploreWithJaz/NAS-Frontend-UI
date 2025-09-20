@@ -1,10 +1,13 @@
 "use client";
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Glitch from "@/components/layout/Glitch";
 import Container from "@/components/ui/Container";
 import Icon from "@/components/ui/Icon";
 
-export default function UnauthorizedPage() {
+export const dynamic = "force-dynamic";
+
+function UnauthorizedContent() {
   const searchParams = useSearchParams();
   const domain = searchParams.get("domain");
 
@@ -36,5 +39,13 @@ export default function UnauthorizedPage() {
         </div>
       </Container>
     </Glitch>
+  );
+}
+
+export default function UnauthorizedPage() {
+  return (
+    <Suspense>
+      <UnauthorizedContent />
+    </Suspense>
   );
 }
