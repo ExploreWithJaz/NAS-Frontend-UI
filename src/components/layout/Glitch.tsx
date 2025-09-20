@@ -2,7 +2,7 @@
 import React, { ReactNode, useMemo } from "react";
 import { motion } from "framer-motion";
 
-type Variant = "blue" | "red" | "orange" | "yellow" | "purple";
+type Variant = "default" | "blue" | "red" | "orange" | "yellow" | "purple";
 
 type GlitchProps = {
   children: ReactNode;
@@ -11,6 +11,7 @@ type GlitchProps = {
 };
 
 const variantColors: Record<Variant, { main: string; bg: string; gradient: string }> = {
+  default: { main: "200, 200, 200", bg: "#1a1a1a", gradient: "#2e2e2e" },
   blue:   { main: "76, 201, 240", bg: "#1a1f2e", gradient: "#242a3d" },
   red:    { main: "255, 99, 132", bg: "#2e1a1a", gradient: "#3d2424" },
   orange: { main: "255, 159, 64", bg: "#2e231a", gradient: "#3d2f24" },
@@ -49,6 +50,50 @@ export default function Glitch({
         y: Math.random() * 90,
         duration: Math.random() * 1.3 + 0.7,
       })),
+    []
+  );
+
+  // Generate binary code streams with grid-based positioning to prevent overlap
+  const binaryStreams = useMemo(
+    () => {
+      const gridCols = 6; // Number of columns
+      const gridRows = 3; // Number of rows
+      const totalSlots = gridCols * gridRows;
+      const streamCount = 12;
+      
+      // Create available grid positions
+      const availablePositions = [];
+      for (let row = 0; row < gridRows; row++) {
+        for (let col = 0; col < gridCols; col++) {
+          availablePositions.push({
+            x: (col * (100 / gridCols)) + (Math.random() * 10 + 5), // Add some random offset within the grid cell
+            y: (row * (100 / gridRows)) + (Math.random() * 15 + 5),
+          });
+        }
+      }
+      
+      // Shuffle positions to randomize placement
+      const shuffledPositions = availablePositions.sort(() => Math.random() - 0.5);
+      
+      return Array.from({ length: Math.min(streamCount, totalSlots) }, (_, i) => {
+        const streamLength = Math.floor(Math.random() * 15) + 8; // 8-22 characters
+        const binaryCode = Array.from({ length: streamLength }, () => 
+          Math.random() > 0.5 ? '1' : '0'
+        ).join('');
+        
+        const position = shuffledPositions[i];
+        
+        return {
+          id: i,
+          code: binaryCode,
+          x: position.x,
+          y: position.y,
+          duration: Math.random() * 3 + 2, // 2-5 seconds
+          delay: Math.random() * 8, // Stagger the start times
+          fontSize: Math.random() * 4 + 12, // 12-16px (slightly larger for better spacing)
+        };
+      });
+    },
     []
   );
 
@@ -239,6 +284,71 @@ export default function Glitch({
               : undefined
           }
         />
+      ))}
+
+      {/* Binary code streams */}
+      {binaryStreams.map((stream) => (
+        <motion.div
+          key={stream.id}
+          className="absolute font-mono select-none pointer-events-none"
+          style={{
+            left: `${stream.x}%`,
+            top: `${stream.y}%`,
+            fontSize: `${stream.fontSize}px`,
+            color: `rgb(${colors.main})`,
+            textShadow: `0 0 10px rgba(${colors.main}, 0.8)`,
+            writingMode: 'vertical-rl',
+            textOrientation: 'upright',
+            letterSpacing: '3px',
+            lineHeight: '1.4',
+          }}
+          initial={{ opacity: 0 }}
+          animate={
+            animation
+              ? {
+                  opacity: [0, 0.8, 0.8, 0.4, 0],
+                }
+              : { opacity: 0.6 }
+          }
+          transition={
+            animation
+              ? {
+                  duration: stream.duration + 2, // Extra time for fade out
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: stream.delay,
+                  repeatDelay: Math.random() * 5 + 3, // Random pause between repeats
+                }
+              : undefined
+          }
+        >
+          {stream.code.split('').map((char, index) => (
+            <motion.span
+              key={`${stream.id}-${index}`}
+              initial={{ opacity: 0 }}
+              animate={
+                animation
+                  ? {
+                      opacity: [0, 1, 1, 0.7, 0],
+                    }
+                  : { opacity: 1 }
+              }
+              transition={
+                animation
+                  ? {
+                      duration: stream.duration + 2,
+                      delay: stream.delay + (index * 0.1), // Typing effect
+                      repeat: Infinity,
+                      ease: "easeOut",
+                      repeatDelay: Math.random() * 5 + 3,
+                    }
+                  : undefined
+              }
+            >
+              {char}
+            </motion.span>
+          ))}
+        </motion.div>
       ))}
 
       {/* Noise overlay */}

@@ -27,11 +27,11 @@ export default function Container({
   }[variant];
 const colorClass = {
     default: "border-gray-300 bg-gray-700",
-    blue: "border-[#4CC9F0] bg-[#4CC9F033]",
-    red: "border-[#EF4444] bg-[#EF444433]",
-    orange: "border-[#F97316] bg-[#F9731633]",
-    yellow: "border-[#EAB308] bg-[#EAB30833]",
-    purple: "border-[#8B5CF6] bg-[#8B5CF633]",
+    blue: "border-[#4CC9F0] bg-[#4CC9F088]",
+    red: "border-[#EF4444] bg-[#EF444488]",
+    orange: "border-[#F97316] bg-[#F9731688]",
+    yellow: "border-[#EAB308] bg-[#EAB30888]",
+    purple: "border-[#8B5CF6] bg-[#8B5CF688]",
 }[color];
 
   return (

@@ -6,10 +6,10 @@ import Icon from '@/components/ui/Icon'
 
 function page() {
   return (
-    <Glitch animation={true} variant="red">
+    <Glitch animation={true} variant="default">
       <Container
         variant="card"
-        color="red"
+        color="default"
         className="p-2.5 mx-4 flex w-[400px] h-auto"
       >
         <div>
