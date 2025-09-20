@@ -1,11 +1,11 @@
 import React from 'react';
 
 type IconName =
-    'error'
-    | 'success'
-    | 'info'
-    | 'warning'
+    'warning'
     | 'link'
+    | 'padlock'
+    | 'forbidden'
+    | 'fileSlashed'
     ; // Extend as needed
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {

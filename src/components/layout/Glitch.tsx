@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 type Variant = "blue" | "red" | "orange" | "yellow" | "purple";
 
-type BlueGlitchProps = {
+type GlitchProps = {
   children: ReactNode;
   animation?: boolean;
   variant?: Variant;
@@ -18,17 +18,17 @@ const variantColors: Record<Variant, { main: string; bg: string; gradient: strin
   purple: { main: "153, 102, 255", bg: "#231a2e", gradient: "#2f243d" },
 };
 
-export default function BlueGlitch({
+export default function Glitch({
   children,
   animation = true,
   variant = "blue",
-}: BlueGlitchProps) {
+}: GlitchProps) {
   const colors = variantColors[variant];
 
   // Generate random positions for particles ONCE per mount
   const particles = useMemo(
     () =>
-      Array.from({ length: 12 }, (_, i) => ({
+      Array.from({ length: 16 }, (_, i) => ({
         id: i,
         size: Math.random() * 2 + 1,
         x: Math.random() * 100,
@@ -41,7 +41,7 @@ export default function BlueGlitch({
   // Generate random glitch squares ONCE per mount
   const glitchSquares = useMemo(
     () =>
-      Array.from({ length: 12 }, (_, i) => ({
+      Array.from({ length: 16 }, (_, i) => ({
         id: i,
         width: Math.random() * 60 + 20,
         height: Math.random() * 40 + 15,
