@@ -30,4 +30,11 @@ COPY --from=builder /app/package-lock.json ./package-lock.json
 RUN npm ci --omit=dev
 
 EXPOSE 3000
+
+LABEL io.casaos.category="Development"
+LABEL io.casaos.name="Vault UI"
+LABEL io.casaos.description="My custom Next.js web app running in Docker"
+LABEL io.casaos.icon="https://raw.githubusercontent.com/ExploreWithJaz/NAS-Frontend-UI/master/public/vault-icon.png"
+LABEL io.casaos.port="3000"
+
 CMD ["npm", "start"]
